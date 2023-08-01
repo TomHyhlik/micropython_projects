@@ -1,0 +1,69 @@
+# USAGE:
+# This makefile loads the main.py to the micropython device
+# the script starts running by reseting the micropython device
+# you can do this manually by entering the following lines bellow to terminal
+# python3 -m mp.mpfshell
+# > open cu.usbserial-1420
+# > put main.py
+
+# PROJECTNAME = server_http
+# PROJECTNAME = ledStrip_rainbow
+PROJECTNAME = ledStrip_lamp_basic
+
+# DEVICENAME = "tty.usbserial-1420"
+DEVICENAME = "ttyUSB0"
+# DEVICENAME=COM7
+
+CC = python3
+CC_PARAM = -m mp.mpfshell
+
+# FILES = $(shell find ./$(PROJECTNAME) -name '*.py')
+FILES = $(wildcard ./$(PROJECTNAME)/*.py)
+# FILES += ./lib/WiFi_connect.py
+
+CMD_PUTFILES := $(foreach file,$(FILES), put $(file) $(notdir $(file))  \n)
+CMD_RMFILES := $(foreach file,$(FILES), rm $(notdir $(file)) \n)
+
+CMD_OPEN = "open $(DEVICENAME)"
+
+SCRIPT_INPUT_PUT = " \
+	$(CMD_OPEN) \n \
+	$(CMD_PUTFILES) \n \
+	exit\n \
+	"
+
+SCRIPT_INPUT_LS = " \
+	$(CMD_OPEN) \n \
+	ls \n \
+	exit\n \
+	"
+
+SCRIPT_INPUT_RM = " \
+	$(CMD_OPEN) \n \
+	$(CMD_RMFILES) \n \
+	exit\n \
+	"
+
+all: upload
+
+
+upload:
+	echo "Files to upload: " $(FILES) 
+	echo "Files cmd: " $(CMD_PUTFILES) 
+
+	echo $(SCRIPT_INPUT_PUT) | $(CC) $(CC_PARAM)
+
+run:
+	termik -conn serial -pname $(DEVICENAME) -baud 115200
+
+ls:
+	echo $(SCRIPT_INPUT_LS) | $(CC) $(CC_PARAM)
+
+clean:
+	echo $(SCRIPT_INPUT_RM) | $(CC) $(CC_PARAM)
+
+
+# open:
+# 	echo $(CMD_OPEN) | $(CC) $(CC_PARAM)
+# 	ls
+
