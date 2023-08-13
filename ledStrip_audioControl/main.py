@@ -57,10 +57,10 @@ microphone = machine.ADC(0)
 
 ######### Config 
 maxLedsOn = 4
-microphoneSensitivity = 200.0
+microphoneSensitivity = 150.0
 
-microphoneSensitivity_range_top = 200.0
-microphoneSensitivity_range_bottom = 2.0
+microphoneSensitivity_range_top = 150.0
+microphoneSensitivity_range_bottom = 1.0
 
 
 # Globals
@@ -141,12 +141,12 @@ while True:
     # update microphone sensitivity
     if (current_ledsOn_coef > 0):
         # decrease sensitivity
-        microphoneSensitivity *= (0.99 - (current_ledsOn_coef * 0.01))
+        microphoneSensitivity *= (0.99 - (current_ledsOn_coef * 0.003))
         if (microphoneSensitivity < microphoneSensitivity_range_bottom):
             microphoneSensitivity = microphoneSensitivity_range_bottom
     else:
         # increase sensitivity
-        microphoneSensitivity *= 1.002
+        microphoneSensitivity *= 1.001
         if (microphoneSensitivity > microphoneSensitivity_range_top):
             microphoneSensitivity = microphoneSensitivity_range_top
     # print("micSens: ", microphoneSensitivity)
