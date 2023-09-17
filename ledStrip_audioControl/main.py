@@ -39,6 +39,7 @@ pin_ledStrip = 15
 pin_debug = 16
 
 print('\r\nAppstar....................................1')
+machine.freq(160000000)
 print( "\t* System clock: ", machine.freq() / 1000000, "MHz")
 
 pinDebug = machine.Pin(pin_debug, machine.Pin.OUT)
@@ -86,8 +87,8 @@ microphoneSamples = [ 0 ]
 while True:
     
     # Debug pin switch
-    # pinDebug.off()
-    # pinDebug.on()
+    pinDebug.off()
+    pinDebug.on()
 
 
     # # # Read Microphone
