@@ -34,7 +34,7 @@ def hsv_to_rgb(h, s, v):
 
 
 
-pin_ledStrip = 15
+pin_ledStrip = 5
 # pin_integratedLed = 2
 pin_debug = 16
 
@@ -57,8 +57,8 @@ microphone = machine.ADC(0)
 
 
 ######### Config 
-maxLedsOn = 4
-microphoneSensitivity = 150.0
+maxLedsOn = 3
+microphoneSensitivity = 100.0
 
 microphoneSensitivity_range_top = 150.0
 microphoneSensitivity_range_bottom = 1.0
@@ -87,8 +87,8 @@ microphoneSamples = [ 0 ]
 while True:
     
     # Debug pin switch
-    pinDebug.off()
-    pinDebug.on()
+    # pinDebug.off()
+    # pinDebug.on()
 
 
     # # # Read Microphone

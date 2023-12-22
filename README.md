@@ -24,7 +24,7 @@ The purpose is to create a decoration lighting for a playing music.
 | Periphery                     | ESP8266        | Node MCU PCB |
 | ----------------------------- | -------------- | -------------|
 | Microphone Analog output      | ADC0 			 | A1 			|
-| WS2812B						| GPIO15		 | D8			|
+| WS2812B						| GPIO5		 | D1			|
 | Debug pin output      		| GPIO16		 | D0			|
 
 
